@@ -1,2 +1,2 @@
 # rest-API-example
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+Deploy it to heroku using heroku CLI
