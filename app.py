@@ -1,6 +1,8 @@
 from flask import Flask
 from datetime import datetime
-import requests, json
+import requests, json, re
+from re import match
+from bs4 import BeautifulSoup
 app = Flask(__name__)
 
 @app.route('/citl_design') #https://yourdomain.com/
@@ -21,7 +23,38 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
-    
+   
+@app.route('/username=<string:username>')
+def instaprofile(un):
+    uReq = requests
+    bSoup = BeautifulSoup
+    website = uReq.get("https://www.instagram.com/{}/".format(str(un)))
+    data = bSoup(website.content, "lxml")
+    for getInfoInstagram in data.findAll("script", {"type":"text/javascript"})[3]:
+        getJsonInstagram = re.search(r'window._sharedData\s*=\s*(\{.+\})\s*;', getInfoInstagram).group(1)
+        data = json.loads(getJsonInstagram)
+        for instagramProfile in data["entry_data"]["ProfilePage"]:
+    	    username = instagramProfile["graphql"]["user"]["username"]
+    	    name = instagramProfile["graphql"]["user"]["full_name"]
+    	    picture = instagramProfile["graphql"]["user"]["profile_pic_url_hd"]
+    	    biography = instagramProfile["graphql"]["user"]["biography"]
+    	    followers = instagramProfile["graphql"]["user"]["edge_followed_by"]["count"]
+    	    following = instagramProfile["graphql"]["user"]["edge_follow"]["count"]
+    	    private = instagramProfile["graphql"]["user"]["is_private"]
+    	    media = instagramProfile["graphql"]["user"]["edge_owner_to_timeline_media"]["count"]
+    	    result = {
+    			"result": {
+    				"username": username,
+    				"fullname": name,
+    				"bio": biography,
+    				"followers": followers,
+    				"following": following,
+    				"media": media,
+    				"private": private,
+    				"profile_img": picture
+    			}
+    		}
+    	    return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/template')
 def out():
     type = []
