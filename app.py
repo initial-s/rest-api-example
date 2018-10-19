@@ -22,12 +22,12 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
     
-@app.route('/json?') #https://yourdomain.com/json?
+@app.route('/template')
 def out():
-    contoh = ['citl','design','kreasi tanpa batas']
+    type = []
     data = {
         'status':'OK',
-        'result':contoh
+        'message':type
     }
     return(json.dumps(data, indent=4, sort_keys=False))
 
