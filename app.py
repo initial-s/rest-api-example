@@ -29,7 +29,7 @@ def post():
     headers = {
         'Content-Type': 'application/json'
     }
-    message = []
+    message = none
    # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
     data = {'status':'ok', 'message': message}
     return (json.dumps(data, indent=4, sort_keys=False))
@@ -66,10 +66,14 @@ def instaprofile(un):
     	    return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
 def out():
-    type = ['flex','template','text']
+    type = none
+    altText = none
+    Urlimage = none
+    uri = none
+    test = [{"type": type,"altText": altText,"template": {"type": "image_carousel","columns": [{"imageUrl": Urlimage,"action": {"type": "uri","uri": none,"area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
     data = {
         'status':'OK',
-        'message':type
+        'message':test
     }
     return(json.dumps(data, indent=4, sort_keys=False))
 
