@@ -30,7 +30,7 @@ def post():
         'Content-Type': 'application/json'
     }
     message = null
-    return {'status':'ok', 'message': message}.202
+    return {'status':'ok', 'message': message}
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
