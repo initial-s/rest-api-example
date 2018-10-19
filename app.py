@@ -23,7 +23,8 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
-  
+ 
+@app.route('/test')
 def post()
     headers {
         'Content-Type': 'application/json'
