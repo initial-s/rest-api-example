@@ -23,7 +23,13 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
-   
+  
+def post()
+    headers {
+        'Content-Type': 'application/json'
+    }
+    message = null
+    return {'status':'ok', 'message': message}.202
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
