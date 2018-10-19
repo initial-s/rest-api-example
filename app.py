@@ -66,11 +66,11 @@ def instaprofile(un):
     	    return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
 def out():
-    type = none
-    altText = none
-    Urlimage = none
-    uri = none
-    test = [{"type": type,"altText": altText,"template": {"type": "image_carousel","columns": [{"imageUrl": Urlimage,"action": {"type": "uri","uri": none,"area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
+    type = null
+    altText = null
+    Urlimage = null
+    uri = null
+    test = [{"type": type,"altText": altText,"template": {"type": "image_carousel","columns": [{"imageUrl": Urlimage,"action": {"type": "uri","uri": uri,"area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
     data = {
         'status':'OK',
         'message':test
