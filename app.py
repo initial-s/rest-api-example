@@ -24,7 +24,7 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
    
-@app.route('/username=<string:username>')
+@app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
     bSoup = BeautifulSoup
