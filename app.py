@@ -29,8 +29,8 @@ def post():
     headers = {
         'Content-Type': 'application/json'
     }
-    message = {}
-    return {'status':'ok', 'message': message}
+    message = []
+    return requests.post({'status':'ok', 'message': message}, headers=headers)
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
