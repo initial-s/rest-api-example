@@ -29,7 +29,7 @@ def post():
     headers = {
         'Content-Type': 'application/json'
     }
-    message = null
+    message = {}
     return {'status':'ok', 'message': message}
 @app.route('/username=<string:un>')
 def instaprofile(un):
