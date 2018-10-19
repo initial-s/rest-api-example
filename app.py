@@ -24,14 +24,14 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
  
-@app.route('/test')
+@app.route('/test, methods=['POST')
 def post():
     headers = {
         'Content-Type': 'application/json'
     }
     message = []
-    url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
-    return requests.post(url,{'status':'ok', 'message': message}, headers=headers)
+   # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
+    return {'status':'ok', 'message': message}
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
