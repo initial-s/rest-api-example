@@ -26,7 +26,7 @@ def hello(name):
  
 @app.route('/test')
 def post()
-    headers {
+    headers = {
         'Content-Type': 'application/json'
     }
     message = null
