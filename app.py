@@ -25,13 +25,14 @@ def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
  
 @app.route('/test', methods=['POST'])
-def post():
+def post(headers):
     headers = {
         'Content-Type': 'application/json'
     }
     message = []
    # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
-    return {'status':'ok', 'message': message}
+    data = {'status':'ok', 'message': message}
+    return (json.dumps(data, indent=4, sort_keys=False))
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
