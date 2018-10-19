@@ -24,7 +24,7 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
  
-@app.route('/test, methods=['POST')
+@app.route('/test', methods=['POST'])
 def post():
     headers = {
         'Content-Type': 'application/json'
