@@ -64,9 +64,9 @@ def instaprofile(un):
     			}
     		}
     	    return(json.dumps(result, indent=4, sort_keys=False))
-@app.route('/template')
+@app.route('/template' ,methods=['POST'])
 def out():
-    type = []
+    type = ['flex','template','text']
     data = {
         'status':'OK',
         'message':type
