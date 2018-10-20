@@ -65,6 +65,23 @@ def instaprofile(un):
     			}
     		}
     	    return(json.dumps(result, indent=4, sort_keys=False))
+@app.route('/igstory=<string:username>')
+def igtory(username):
+    r = requests.get("https://saveig.com/?link={}".format(username))
+    soup = BeautifulSoup(r.content,"lxml")
+    result=[]
+    try:
+        data = soup.findAll('div',{'class':'line'})
+        result = []
+        for hasil in data:
+            video = hasil.find('video')['src']
+            result.append({'video':video})
+    except:
+        data = soup.findAll('div',{'class':'line'})
+        for hasil in data:
+            image=hasil.find('img')['src']
+            result.append({'image':image})
+    return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/postig=<string:usn>')
 def instapost(usn):
     datas = []
