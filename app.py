@@ -81,7 +81,7 @@ def instapost(usn):
             for post in md["edges"]:
                 url = post["node"]["display_url"]
                 video = post["node"]["is_video"]
-                datas.appened({'url':url,'vid':video})
+                datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
 def out():
