@@ -52,6 +52,7 @@ def instaprofile(un):
     	    private = instagramProfile["graphql"]["user"]["is_private"]
     	    media = instagramProfile["graphql"]["user"]["edge_owner_to_timeline_media"]["count"]
     	    result = {
+                "Creator": "Initial_S",
     			"result": {
     				"username": username,
     				"fullname": name,
