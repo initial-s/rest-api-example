@@ -67,7 +67,7 @@ def instaprofile(un):
     	    return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/postig=<string:usn>')
 def instapost(usn):
-   # datas = []
+    datas = []
     #result = {'status':'ok'}, data=datas
     link = 'https://instagram.com/{}'.format(usn)
     r = requests.get(link)
@@ -81,8 +81,8 @@ def instapost(usn):
             for post in md["edges"]:
                 url = post["node"]["display_url"]
                 video = post["node"]["is_video"]
-                result = {'Creator':'Initial_S','status':'succes'},{'result':[{'url':url,'vid':video}]}
-    return(json.dumps(result, indent=4, sort_keys=False))
+                datas.appened({'url':url,'vid':video})
+    return(json.dumps(datas, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
 def out():
     test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
