@@ -65,6 +65,23 @@ def instaprofile(un):
     			}
     		}
     	    return(json.dumps(result, indent=4, sort_keys=False))
+@app.route('/igstory=<string:usn>')
+def instapost(usn):
+    datas = []
+    link = 'https://instagram.com/{}'.format(usn)
+    r = requests.get(link)
+    soup = BeautifulSoup(r.content,"lxml")
+    for getInfoInstagram in soup.findAll("script", {"type":"text/javascript"})[3]:
+        getJsonInstagram = re.search(r'window._sharedData\s*=\s*(\{.+\})\s*;', getInfoInstagram).group(1)
+        data = json.loads(getJsonInstagram)
+        for insta in data["entry_data"]["ProfilePage"]:
+            md = insta["graphql"]["user"]
+            md = md["edge_owner_to_timeline_media"]
+            for post in md["edges"]:
+                url = post["node"]["display_url"]
+                video = post["node"]["is_video"]
+                datas.append({'Creator':'Initial_S','url':url,'vid':video})
+    return(json.dumps(datas, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
 def out():
     test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
