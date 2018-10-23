@@ -101,13 +101,13 @@ def instapost(usn):
                 datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
 @app.route('/template' ,methods=['POST'])
-def out():
+def out(title, columns):
    # test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
     data = {
         'status':'OK',
         'message': {
             'type': 'template,
-            'altText': title
+            'altText': title,
             'template': {
                 'type': 'image_carousel',
                 'columns': columns
