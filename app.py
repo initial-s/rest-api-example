@@ -103,7 +103,7 @@ def instapost(usn):
 @app.route('/template' ,methods=['POST'])
 def out(title, columns):
    # test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
-    return {
+    dara = {
         'status':'OK',
         'message': {
             'type': 'template,
@@ -114,7 +114,7 @@ def out(title, columns):
             }
         }
     }
-   # return(json.dumps(data, indent=4, sort_keys=False))
+    return(json.dumps(data, indent=4, sort_keys=False))
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
