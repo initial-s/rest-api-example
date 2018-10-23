@@ -5,7 +5,7 @@ from re import match
 from bs4 import BeautifulSoup
 app = Flask(__name__)
 
-@app.route('/citl_design') #https://yourdomain.com/
+@app.route('/') #https://yourdomain.com/
 def homepage():
     return '''<!DOCTYPE html>
 <html>
@@ -25,13 +25,15 @@ def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
  
 @app.route('/test', methods=['POST'])
-def post(message={message}):
+def post(message):
     headers = {
         'Content-Type': 'application/json'
     }
-   # message = null
+    temp = {
+        'message': message
+    }
    # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
-    data = {'status':'ok', 'message': message}
+    data = {'status':'ok', 'message': temp}
     return (json.dumps(data, indent=4, sort_keys=False))
 @app.route('/username=<string:un>')
 def instaprofile(un):
