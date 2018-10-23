@@ -29,12 +29,12 @@ def post(message):
     headers = {
         'Content-Type': 'application/json'
     }
-    temp = {
+    message = {
         'message': message
     }
    # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
-    data = {'status':'ok', 'message': temp}
-    return (json.dumps(data, indent=4, sort_keys=False))
+   # data = {'status':'ok', 'message': temp}
+    return (json.dumps(message, indent=4, sort_keys=False))
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
