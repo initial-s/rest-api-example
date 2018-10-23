@@ -102,14 +102,9 @@ def instapost(usn):
                 video = post["node"]["is_video"]
                 datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
-@app.route('/template' ,methods=['POST'])
-def out():
-    test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"height": 1040}}}]}}]
-    data = {
-        'status':'OK',
-        'message': test
-    return(json.dumps(data, indent=4, sort_keys=False))
-
+#@app.route('/template' ,methods=['POST'])
+#def out():
+ #   test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"heigh#
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
 
