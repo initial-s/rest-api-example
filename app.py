@@ -23,7 +23,23 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
- 
+@app.route('/messages', methods = ['POST'])
+def api_message():
+
+    if request.headers['Content-Type'] == 'text/plain':
+        return "Text Message: " + request.data
+
+    elif request.headers['Content-Type'] == 'application/json':
+        return "JSON Message: " + json.dumps(request.json)
+
+    elif request.headers['Content-Type'] == 'application/octet-stream':
+        f = open('./binary', 'wb')
+        f.write(request.data)
+                f.close()
+        return "Binary message written!"
+
+    else:
+        return "415 Unsupported Media Type ;)" 
 @app.route('/test', methods=['POST'])
 def post(message):
     headers = {
