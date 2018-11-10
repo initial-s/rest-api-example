@@ -26,14 +26,23 @@ def hello(name):
 
 @app.route('/downloadsmule=<string:key>')
 def downloadsmule(key):
-    hasil = []
     url = requests.get("{}").format(str(key))
     soup = BeautifulSoup(url.content, 'html5lib')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
     meta2 = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
-    json = {"status": "succes","creator":"citl_design(Initial_S)","result":[{"image": image,"url": meta,"description": meta2}]}
-    return(json.dumps(json, indent=4, sort_keys=False))
+    data = {
+        "status": "succes",
+        "creator":"citl_design(Initial_S)",
+        "result":[
+            {
+                "image": image,
+                "url": meta,
+                "description": meta2
+            }
+        ]
+    }
+    return(json.dumps(data, indent=4, sort_keys=False))
 
 @app.route('/username=<string:un>')
 def instaprofile(un):
