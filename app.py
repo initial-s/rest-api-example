@@ -41,7 +41,7 @@ def smule(key):
                 "url": meta,
                 "description": meta2
             }
-        }
+        ]
     }
     return(json.dumps(result, indent=4, sort_keys=False))
 
