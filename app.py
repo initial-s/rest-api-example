@@ -24,26 +24,6 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/downloadsmule=<string:key>')
-def downloadsmule(key):
-    url = requests.get("{}").format(str(key))
-    soup = BeautifulSoup(url.content, 'html5lib')
-    image = soup.find(attrs={"name": "twitter:image:src"})['content']
-    meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
-    meta2 = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
-    data = {
-        "status": "succes",
-        "creator":"citl_design(Initial_S)",
-        "result":[
-            {
-                "image": image,
-                "url": meta,
-                "description": meta2
-            }
-        ]
-    }
-    return(json.dumps(data, indent=4, sort_keys=False))
-
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
@@ -111,9 +91,17 @@ def instapost(usn):
                 video = post["node"]["is_video"]
                 datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
-#@app.route('/template' ,methods=['POST'])
-#def out():
- #   test = [{"type": "template","altText": "testing","template": {"type": "image_carousel","columns": [{"imageUrl": "https://image.ibb.co/b9JR5p/20180811_194145.png","action": {"type": "uri","uri": "http://line.me/ti/p/~devilblack86","area": {"x": 520,"y": 0,"width": 520,"heigh#
+@app.route('/smule=<string:key>')
+def downloadsmule(key):
+    data = []
+    url = requests.get("{}").format(key)
+    soup = BeautifulSoup(url.content, 'html5lib')
+    image = soup.find(attrs={"name": "twitter:image:src"})['content']
+    url = soup.find(attrs={"name": "twitter:player:stream"})['content']
+    des = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
+    data.append({"image":image,"url": url})
+    return(json.dumps(data, indent=4, sort_keys=False))
+
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
 
