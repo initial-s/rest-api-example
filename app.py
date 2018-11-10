@@ -24,9 +24,9 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/<string:key>')
+@app.route('/link=https://www.smule.com/p/<string:key>')
 def smule(key):
-    url = requests.get('{}'.format(key))
+    url = requests.get('https://www.smule.com/p/{}'.format(key))
     soup = BeautifulSoup(url.content, 'html5lib')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
