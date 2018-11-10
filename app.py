@@ -24,7 +24,7 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/link=<string:key>',)
+@app.route('/downloadsmule=<string:key>',)
 def downloadsmule(key):
     hasil = []
     url = requests.get("{}").format(str(key))
