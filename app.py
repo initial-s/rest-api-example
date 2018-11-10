@@ -94,7 +94,7 @@ def instapost(usn):
 @app.route('/smule=<string:key>')
 def downloadsmule(key):
     data = []
-    url = requests.get("{}").format(key)
+    url = requests.get("{}".format(str(key)))
     soup = BeautifulSoup(url.content, 'lxml')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     url = soup.find(attrs={"name": "twitter:player:stream"})['content']
