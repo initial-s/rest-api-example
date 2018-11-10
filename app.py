@@ -24,6 +24,27 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
+@app.route('/smuledownload=<string:key>)
+def smule(key):
+    url = requests.get(''+key)
+    meta = []
+    soup = BeautifulSoup(url.content, 'html5lib')
+    image = soup.find(attrs={"name": "twitter:image:src"})['content']
+    meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
+    meta2 = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
+    result = {
+        "status": "succes",
+        "creator": "initial_s",
+        "result":[
+            {
+                "image": image,
+                "url": meta,
+                "description": meta2
+            }
+        }
+    }
+    return(json.dumps(result, indent=4, sort_keys=False))
+
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
@@ -91,16 +112,6 @@ def instapost(usn):
                 video = post["node"]["is_video"]
                 datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
-@app.route('/downloadsmule=<string:key>')
-def smule(key):
-    data = []
-    url = requests.get("{}".format(key))
-    soup = BeautifulSoup(url.content, 'lxml')
-    image = soup.find(attrs={"name": "twitter:image:src"})['content']
-    url = soup.find(attrs={"name": "twitter:player:stream"})['content']
-    des = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
-    data.append({"image":image,"url": url})
-    return(json.dumps(data, indent=4, sort_keys=False))
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=True)
