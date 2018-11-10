@@ -24,7 +24,7 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/smuledownload=<string:key>)
+@app.route('/smuledownload=<string:key>')
 def smule(key):
     url = requests.get(''+key)
     meta = []
