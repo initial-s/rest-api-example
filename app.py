@@ -44,7 +44,7 @@ def smule(key):
     }
     return(json.dumps(result, indent=4, sort_keys=False))
 
-@app.route('/username=<string:un>')
+@app.route('/infoig=<string:un>')
 def instaprofile(un):
     uReq = requests
     bSoup = BeautifulSoup
