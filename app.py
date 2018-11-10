@@ -91,10 +91,10 @@ def instapost(usn):
                 video = post["node"]["is_video"]
                 datas.append({'url':url,'vid':video})
     return(json.dumps(datas, indent=4, sort_keys=False))
-@app.route('/smule?link=<string:usn>')
-def smule(usn):
+@app.route('/downloadsmule=<string:key>')
+def smule(key):
     data = []
-    url = requests.get("{}".format(str(usn)))
+    url = requests.get("{}".format(key))
     soup = BeautifulSoup(url.content, 'lxml')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     url = soup.find(attrs={"name": "twitter:player:stream"})['content']
