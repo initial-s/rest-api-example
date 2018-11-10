@@ -24,17 +24,17 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/test', methods=['POST'])
-def post(message):
-    headers = {
-        'Content-Type': 'application/json'
-    }
-    message = {
-        'message': message
-    }
-   # url = 'https://game.linefriends.com/jbp-lcs-ranking/lcs/sendMessage'
-   # data = {'status':'ok', 'message': temp}
-    return (json.dumps(message, indent=4, sort_keys=False))
+@app.route('/link=<string:key>',)
+def downloadsmule(key):
+    hasil = []
+    url = requests.get("{}").format(str(key))
+    soup = BeautifulSoup(url.content, 'html5lib')
+    image = soup.find(attrs={"name": "twitter:image:src"})['content']
+    meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
+    meta2 = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
+    json = {"status": "succes","creator":"citl_design(Initial_S)","result":[{"image": image,"url": meta,"description": meta2}]}
+    return(json.dumps(json, indent=4, sort_keys=False))
+
 @app.route('/username=<string:un>')
 def instaprofile(un):
     uReq = requests
