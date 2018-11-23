@@ -26,7 +26,7 @@ def hello(name):
 
 @app.route('/joox&songid=<string:sid>')
 def jooxdownload(sid):
-    url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(str(sid)))
+    url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
     data = url.text
     data = json.loads(data)
     artis = data['msinger']
