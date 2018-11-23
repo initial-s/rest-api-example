@@ -24,6 +24,29 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
+@app.route('/api-joox/songid=<string:songid>')
+def jooxdownload(songid)
+    url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(str(songid)))
+    data = url.text
+    data = json.loads(data)
+    artis = data['msinger']
+    song = data['msong']
+    single = data['malbum']
+    mp3 = data['mp3Url']
+    img = data['imgSrc']
+    json = {
+        "Joox-Api-By": "Initial_S",
+        "result": [
+            {
+                "artis": artis,
+                "judul": song,
+                "single":single,
+                "mp3Url": mp3,
+                "imgUrl": img
+            }
+        ]
+    }
+    return(json.dumps(json, indent=4, sort_keys=False))
 @app.route('/downloadsmule=https://www.smule.com/p/<string:key>')
 def smule(key):
     url = requests.get('https://www.smule.com/p/{}'.format(key))
