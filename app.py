@@ -24,7 +24,7 @@ def homepage():
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
-@app.route('/songid=<string:sid>')
+@app.route('/id/sid=<string:sid>')
 def jooxdownload(sid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
     data = url.text
