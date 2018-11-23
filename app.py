@@ -25,7 +25,7 @@ def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
 
 @app.route('/apijoox.songid=<string:songid>')
-def jooxdownload(songid)
+def jooxdownload(songid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(str(songid)))
     data = url.text
     data = json.loads(data)
