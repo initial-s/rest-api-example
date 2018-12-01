@@ -23,7 +23,6 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
-
 @app.route('/songid/<string:sid>')
 def joox(sid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
@@ -47,10 +46,9 @@ def joox(sid):
         ]
     }
     return(json.dumps(result, indent=4, sort_keys=False))
-
 @app.route('/downloadsmule=https://www.smule.com/p/<string:key>')
 def smule(key):
-    url = requests.get("https://www.smule.com/p/"+key)
+    url = requests.get("https://www.smule.com/p/{}".format(key))
     soup = BeautifulSoup(url.content, 'html5lib')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
@@ -67,7 +65,6 @@ def smule(key):
         ]
     }
     return(json.dumps(result, indent=4, sort_keys=False))
-
 @app.route('/yt-download=<string:link>')
 def smule(link):
     url = requests.get("www.saveoffline.com/process/?url={}&type=json".format(link))
