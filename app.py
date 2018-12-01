@@ -47,6 +47,7 @@ def joox(sid):
         ]
     }
     return(json.dumps(result, indent=4, sort_keys=False))
+
 @app.route('/downloadsmule=https://www.smule.com/p/<string:key>')
 def smule(key):
     url = requests.get("https://www.smule.com/p/"+key)
