@@ -70,7 +70,7 @@ def smule(key):
 
 @app.route('/yt-download=<string:link>')
 def smule(link):
-    url = requests.get("www.saveoffline.com/process/?url={}&type=json".format(link)
+    url = requests.get("www.saveoffline.com/process/?url={}&type=json".format(link))
     hasil = url.text
     data = json.loads(hasil)
     return(json.dumps(data,indent=4, sort_keys=False))
