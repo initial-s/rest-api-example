@@ -49,7 +49,7 @@ def joox(sid):
     return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/downloadsmule=<string:key>')
 def smule(key):
-    url = requests.get('https://www.smule.com{}'.format(key))
+    url = requests.get(key)
     soup = BeautifulSoup(url.content, 'html5lib')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
