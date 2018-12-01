@@ -66,7 +66,7 @@ def smule(key):
     }
     return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/yt-download=<string:link>')
-def smule(link):
+def ytdownload(link):
     url = requests.get("www.saveoffline.com/process/?url={}&type=json".format(link))
     hasil = url.text
     data = json.loads(hasil)
