@@ -47,9 +47,29 @@ def joox(sid):
         ]
     }
     return(json.dumps(result, indent=4, sort_keys=False))
-@app.route('/linksmule=https://www.smule.com/p/<string:key>')
+@app.route('/downloadsmule=https://www.smule.com/p/<string:key>')
 def smule(key):
     url = requests.get("https://www.smule.com/p/"+key)
+    soup = BeautifulSoup(url.content, 'html5lib')
+    image = soup.find(attrs={"name": "twitter:image:src"})['content']
+    meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
+    meta2 = soup.find(attrs={"name": "twitter:description"})['content'].replace('amp;','')
+    result = {
+        "status": "succes",
+        "creator": "initial_s",
+        "result":[
+            {
+                "image": image,
+                "url": meta,
+                "description": meta2
+            }
+        ]
+    }
+    return(json.dumps(result, indent=4, sort_keys=False))
+
+@app.route('/downloadsmule=https://www.smule.com/c/<string:key>')
+def smule(key):
+    url = requests.get("https://www.smule.com/c/"+key)
     soup = BeautifulSoup(url.content, 'html5lib')
     image = soup.find(attrs={"name": "twitter:image:src"})['content']
     meta = soup.find(attrs={"name": "twitter:player:stream"})['content']
