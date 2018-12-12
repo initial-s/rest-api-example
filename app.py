@@ -23,7 +23,7 @@ def homepage():
 @app.route('/hello?<string:name>') #https://yourdomain.com/hello?arsybai
 def hello(name):
     return 'Hello.. how are you {}'.format(str(name))
-@app.route('/songid/<string:sid>')
+@app.route('/songid=<string:sid>')
 def joox(sid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
     data = url.text
@@ -67,7 +67,7 @@ def smule(key):
     return(json.dumps(result, indent=4, sort_keys=False))
 @app.route('/yt-download=<string:link>')
 def ytdownload(link):
-    url = requests.get("www.saveoffline.com/process/?url={}&type=json".format(link))
+    url = requests.get("http://saveoffline.com/process/?url={}&type=json".format(link))
     hasil = url.text
     data = json.loads(hasil)
     for result in data:
