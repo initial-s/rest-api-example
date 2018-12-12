@@ -70,9 +70,7 @@ def ytdownload(link):
     url = requests.get("http://saveoffline.com/process/?url={}&type=json".format(link))
     hasil = url.text
     data = json.loads(hasil)
-    for result in data:
-        print(result)
-        return(json.dumps(result,indent=4, sort_keys=False))
+    return(json.dumps(result,indent=4, sort_keys=False))
 @app.route('/infoig=<string:un>')
 def instaprofile(un):
     uReq = requests
