@@ -16,4 +16,5 @@ requests==2.18.4
 lxml==3.5.0
 html5lib==0.9999999
 pafy
+youtube-dl
 requests_toolbelt
