@@ -20,7 +20,22 @@ def homepage():
 </body>
 </html>'''
 #======================[ ARSYBAI ]==========================================
-
+@app.route('/zodiak=<zodiak>', methods=['GET'])
+def zodiak(zodiak):
+    
+    r = requests.get('https://kuis.online/ramalan-zodiak?bintang={}'.format(zodiak))
+    citl = BeautifulSoup(r.content,'html5lib')
+    sri = citl.findAll('div',{'class':'col-md-12'})
+    hasil = "Ramalan Zodiak {} Hari Ini\n".format(zodiak)
+    for citl in sri:
+        hasil += citl.find('small').text
+        thumbnail = "https://kuis.online/images/zodiak/{}.gif".format(zodiak)
+        result = {
+            "creator": "Initial_S",
+            "result":  hasil,
+            "thumbnail": thumbnail
+        }
+        return jsonify(result)
 @app.route('/songid=<sid>', methods=['GET'])
 def joox(sid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
