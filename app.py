@@ -50,7 +50,7 @@ def zodiak(zodiak):
         return jsonify(result)
 @app.route('/joox-search=<query>', methods=['GET'])
 def jooxlist(query):
-    resulr = []
+    result = []
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_search?country=id&lang=id&search_input={}&sin=1&ein=30".format(str(query)))
     data = url.text
     data = json.loads(data)
