@@ -21,7 +21,7 @@ def homepage():
 </html>'''
 #======================[ ARSYBAI ]==========================================
 
-@app.route('/bmkg', methode=['GET'])
+@app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
     citl = BeautifulSoup(r.content,'html5lib')
@@ -48,7 +48,7 @@ def zodiak(zodiak):
             "thumbnail": thumbnail
         }
         return jsonify(result)
-@app.route('/joox-search=<query>', methode=['GET'])
+@app.route('/joox-search=<query>', methods=['GET'])
 def jooxlist(query):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_search?country=id&lang=id&search_input={}&sin=1&ein=30".format(str(query)))
     data = url.text
