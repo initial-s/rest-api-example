@@ -1,6 +1,6 @@
 from flask import Flask, request, abort, redirect, jsonify
 from datetime import datetime
-import requests, json, re, pafy, sys, os
+import requests, json, re, pafy, sys, os, base64
 from re import match
 from bs4 import BeautifulSoup
 app = Flask(__name__)
@@ -20,6 +20,18 @@ def homepage():
 </body>
 </html>'''
 #======================[ ARSYBAI ]==========================================
+
+@app.route('/bmkg', methode=['GET'])
+def bmkg():
+    r = requests.get('https://inatews.bmkg.go.id/light/?')
+    citl = BeautifulSoup(r.content,'html5lib')
+    info = citl.find('div',{'class':'col-md-12'}).find('h4').text
+    saran = citl.findAll('div',{'class':'col-sm-6'})[1].find('h5').text
+    result = {
+        "info": info,
+        "saran": saran
+    }
+    return jsonify(result)
 @app.route('/zodiak=<zodiak>', methods=['GET'])
 def zodiak(zodiak):
     
@@ -34,6 +46,19 @@ def zodiak(zodiak):
             "creator": "Initial_S",
             "result":  hasil,
             "thumbnail": thumbnail
+        }
+        return jsonify(result)
+@app.route('/joox-search=<query>', methode=['GET'])
+def jooxlist(query):
+    url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_search?country=id&lang=id&search_input={}&sin=1&ein=30".format(str(query)))
+    data = url.text
+    data = json.loads(data)
+    for music in data['itemlist']:
+        judul = base64.b64decode(music['info1']).decode('utf-8')
+        songid = music['songid']
+        result = {
+            "judul": judul,
+            "songid": songid
         }
         return jsonify(result)
 @app.route('/songid=<sid>', methods=['GET'])
