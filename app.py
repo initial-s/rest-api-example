@@ -50,17 +50,15 @@ def zodiak(zodiak):
         return jsonify(result)
 @app.route('/joox-search=<query>', methods=['GET'])
 def jooxlist(query):
+    resulr = []
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_search?country=id&lang=id&search_input={}&sin=1&ein=30".format(str(query)))
     data = url.text
     data = json.loads(data)
     for music in data['itemlist']:
         judul = base64.b64decode(music['info1']).decode('utf-8')
         songid = music['songid']
-        result = {
-            "judul": judul,
-            "songid": songid
-        }
-        return jsonify(result)
+        result.append({"judul": judul,"songid": songid})
+    return jsonify(result)
 @app.route('/songid=<sid>', methods=['GET'])
 def joox(sid):
     url = requests.get("http://api-jooxtt.sanook.com/web-fcgi-bin/web_get_songinfo?country=id&lang=id&songid={}".format(sid))
