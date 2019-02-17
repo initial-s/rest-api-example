@@ -22,6 +22,23 @@ def homepage():
 #======================[ ARSYBAI ]==========================================
 
 
+@app.route('/togel', methods=['GET'])
+def togel():
+    hasil = []
+    r = requests.get("https://wazetoto.com/wap")
+    soup = BeautifulSoup(r.content, 'html5lib')
+    data = soup.findAll('table', attrs={'class':'table'})
+    hasil = data.select('td > a')
+    result = {
+               "Creator": "FCK VEZA",
+               "status": "200",
+               "result": hasil
+             }
+    for anu in hasil:
+        isi = anu.get_text()
+        link = anu['href']
+        hasil.append({"City":  isi,"Link": link})
+    return jsonify(result)
 @app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
