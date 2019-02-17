@@ -25,7 +25,7 @@ def homepage():
 def ytsearch():
     hasil = []
     hasilnya = {"creator":"Initial_S","result": hasil}
-    url = requests.get("https://www.youtube.com/results?search_query={}".format(ytsearch)
+    url = requests.get("https://www.youtube.com/results?search_query={}".format(ytsearch))
     soup = BeautifulSoup(url.content, 'html5lib')
     data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
     for hasil in data:
