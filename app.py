@@ -52,16 +52,16 @@ def zodiak(zodiak):
         return jsonify(result)
 @app.route('/yt-search=<query>', methods=['GET'])
 def ytsearch(query):
-    hasil = []
-    result = {"creator":"Initial_S","result": hasil}
+    hasilnya = []
+    result = {"creator":"Initial_S","result": hasilnya}
     url = requests.get("https://www.youtube.com/results?search_query={}".format(query))
     soup = BeautifulSoup(url.content, 'html5lib')
     data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
     for hasil in data:
-        title = "{}".format(str(hasil.find('a')['title']))
+        title = str(hasil.find('a')['title'])
         link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
-        ytid = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
-        hasil.append({"title": title,"link": link,"id": ytid})
+        ytid = str(hasil.find('a')['href'].replace('/watch?v=',''))
+        hasilnya.append({"title": title,"link": link,"id": ytid})
     return jsonify(result)
 @app.route('/joox-search=<query>', methods=['GET'])
 def jooxlist(query):
