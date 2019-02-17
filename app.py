@@ -21,19 +21,7 @@ def homepage():
 </html>'''
 #======================[ ARSYBAI ]==========================================
 
-@app.route('yt-search=<query>', methods=['GET'])
-def ytsearch(query):
-    hasil = []
-    result = {"creator":"Initial_S","result": hasil}
-    url = requests.get("https://www.youtube.com/results?search_query={}".format(query))
-    soup = BeautifulSoup(url.content, 'html5lib')
-    data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
-    for hasil in data:
-        title = "{}".format(str(hasil.find('a')['title']))
-        link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
-        ytid = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
-        hasil.append({"title": title,"link": link,"id": ytid})
-    return jsonify(result)
+
 @app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
@@ -45,6 +33,7 @@ def bmkg():
         "saran": saran
     }
     return jsonify(result)
+
 @app.route('/zodiak=<zodiak>', methods=['GET'])
 def zodiak(zodiak):
     
@@ -61,6 +50,19 @@ def zodiak(zodiak):
             "thumbnail": thumbnail
         }
         return jsonify(result)
+@app.route('/yt-search=<query>', methods=['GET'])
+def ytsearch(query):
+    hasil = []
+    result = {"creator":"Initial_S","result": hasil}
+    url = requests.get("https://www.youtube.com/results?search_query={}".format(query))
+    soup = BeautifulSoup(url.content, 'html5lib')
+    data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
+    for hasil in data:
+        title = "{}".format(str(hasil.find('a')['title']))
+        link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
+        ytid = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
+        hasil.append({"title": title,"link": link,"id": ytid})
+    return jsonify(result)
 @app.route('/joox-search=<query>', methods=['GET'])
 def jooxlist(query):
     hasil = []
