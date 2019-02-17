@@ -21,6 +21,18 @@ def homepage():
 </html>'''
 #======================[ ARSYBAI ]==========================================
 
+@app.route('yt-search=<ytsearch>', methods=['GET'])
+def ytsearch():
+    hasilnya = []
+    url = requests.get("https://www.youtube.com/results?search_query={}".format(ytsearch)
+    soup = BeautifulSoup(url.content, 'html5lib')
+    data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
+    for hasil in data:
+        title = "{}".format(str(hasil.find('a')['title']))
+        link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
+        id = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
+        result.append({"title": title,"link": link,"id": id})
+   return jsonify(hasilnya)
 @app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
