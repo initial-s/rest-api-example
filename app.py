@@ -33,7 +33,7 @@ def ytsearch():
         link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
         id = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
         hasil.append({"title": title,"link": link,"id": id})
-   return jsonify(hasil)
+   return jsonify(hasilnya)
 @app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
