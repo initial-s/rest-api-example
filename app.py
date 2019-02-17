@@ -21,19 +21,19 @@ def homepage():
 </html>'''
 #======================[ ARSYBAI ]==========================================
 
-@app.route('yt-search=<ytsearch>', methods=['GET'])
-def ytsearch():
+@app.route('yt-search=<query>', methods=['GET'])
+def ytsearch(query):
     hasil = []
-    hasilnya = {"creator":"Initial_S","result": hasil}
-    url = requests.get("https://www.youtube.com/results?search_query={}".format(ytsearch))
+    result = {"creator":"Initial_S","result": hasil}
+    url = requests.get("https://www.youtube.com/results?search_query={}".format(query))
     soup = BeautifulSoup(url.content, 'html5lib')
     data = soup.findAll('h3' ,{'class':"yt-lockup-title"})
     for hasil in data:
         title = "{}".format(str(hasil.find('a')['title']))
         link = "https://m.youtube.com{}".format(str(hasil.find('a')['href']))
-        id = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
-        hasil.append({"title": title,"link": link,"id": id})
-   return jsonify(hasilnya)
+        ytid = "id: {}".format(str(hasil.find('a')['href'].replace('/watch?v=','')))
+        hasil.append({"title": title,"link": link,"id": ytid})
+   return jsonify(result)
 @app.route('/bmkg', methods=['GET'])
 def bmkg():
     r = requests.get('https://inatews.bmkg.go.id/light/?')
